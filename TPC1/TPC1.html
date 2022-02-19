@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>TPC1 - Jacaré</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+            body {
+               background-image: url("./imgs/background.jfif");
+               background-repeat: no-repeat;
+               background-attachment: fixed;
+               background-size: 100%;
+               margin: 0px 150px;
+            }
+            p{
+                text-align: justify;
+                text-justify: inter-word;
+                padding: 10px 30px;
+            }
+            hr{
+                margin:0px;
+            }
+         </style>
+    </head>
+    
+    <body>
+        <div class="w3-container w3-blue-gray">
+                
+            <h1><b>Jacaré</b></h1>
+            <hr>
+
+            <div class="w3-row">
+                <div class="w3-col s3 w3-center">
+                    <button onclick="show('div1')" class="w3-button"><h4>Informação</h4></button>
+                </div>
+                <div class="w3-col s3 w3-center">
+                    <button onclick="show('div2')" class="w3-button"><h4>Etimologia</h4></button>
+                </div>
+                <div class="w3-col s3 w3-center">
+                    <button onclick="show('div3')" class="w3-button"><h4>Habitat</h4></button>
+                </div>
+                <div class="w3-col s3 w3-center">
+                    <button onclick="show('div4')" class="w3-button"><h4>Espécies</h4></button>
+                </div>
+            </div>
+            <hr>
+                
+            <div id="div1">
+                <h3><b>O que são?</b></h3>
+                <p>
+                    O <b>jacaré</b>, também conhecido como <b>aligátor</b> ou <b>caimão</b>, 
+                    é um crocodiliano da família <i>Alligatoridae</i>.
+                    <br>
+                    É muito parecido com o crocodilo, do qual apenas se distingue 
+                    pela cabeça mais curta e larga e pela presença de membranas 
+                    interdigitais nos polegares das patas traseiras. 
+                    Diferencia-se também em relação à dentição: o quarto dente canino da 
+                    mandíbula inferior do jacaré encaixa num furo da mandíbula superior, enquanto que no 
+                    crocodilo sobressai para fora quando este tem a boca fechada. 
+                    O tamanho de um jacaré pode variar entre 1,2 metros (jacaré-anão) e 5,5 metros (jacaré-açu), 
+                    e pode pesar entre seis e seiscentos quilos.
+                </p>
+                
+                <div class="w3-row">
+                    <figure class="w3-col s4">
+                        <img src="./imgs/americanalligator.jfif" style="max-width:300px;" alt="jacaré-americano">
+                        <figcaption>Jacaré-americano, <i>Alligator mississipiensis</i></figcaption>
+                    </figure>
+                    <figure class="w3-col s4">
+                        <img src="./imgs/chinesealligator.jpg" style="max-width:300px;" alt="jacaré-chinês">
+                        <figcaption>Jacaré-da-china, <i>Alligator sinensis</i></figcaption>
+                    </figure>
+                </div>
+
+                <div style="padding: 10px 30px;">
+                    <a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9" class="w3-button w3-border" style="margin-bottom:20px">Saiba Mais</a>
+                </div>      
+            </div>
+
+            <div id="div2" style="display:none;">
+                <h3><b>Etimologia</b></h3>
+                <p>
+                    O termo "jacaré" origina do termo tupi "<i>îakaré</i>", ou "<i>jaeça-karé</i>", que significa "aquele que olha de lado". 
+                    O termo "aligátor" origina do termo inglês "<i>alligator</i>", sendo este, provavelmente, uma forma anglicanizada 
+                    do espanhol "<i>el lagarto</i>". Algumas antigas variações da grafia em inglês incluem "<i>allagarta</i>" e "<i>alagarto</i>".
+                    Por sua vez, o termo "caimão" origina do termo taino "<i>kaiman</i>". Caimão é um nome comum a diversos jacarés 
+                    americanos do gênero Caiman.
+                </p>
+            </div>
+            
+            <div id="div3" style="display:none;">
+                <h3><b>Distribuição Geográfica</b></h3>
+                <p>
+                    O jacaré-americano (<i>Alligator mississippiensis</i>) é uma espécie típica dos Estados Unidos.
+                    O jacaré-da-china (<i>Alligator sinensis</i>) é encontrado no leste da China, na região do rio Yangtzé.
+                    Os jacarés da subfamília <i>Caimaninae</i> são encontrados na América do Sul, porém o jacaretinga 
+                    (<i>Caiman crocodilus</i>) também é encontrado na América Central e no sul do México.
+                </p>
+                <div class="w3-center">
+                    <img src="./imgs/mapa.JPG" style="margin-bottom:20px" alt="mapa da distribuição de jacarés pelo mundo">
+                </div>
+            </div>
+            
+            <div id="div4" style="display:none;">
+                <h3><b>Espécies de Jacaré</b></h3>
+                <ul>
+                    <li>Superfamília <i>Alligatoroidea</i>
+                        <ul>
+                            <li>Família <i>Alligatoridae</i>
+                                <ul>
+                                    <li>Subfamília <i>Alligatorinae</i>
+                                        <ul>
+                                            <li>Gênero <i>Albertochampsa</i> (extinto)</li>
+                                            <li>Gênero <i>Chrysochampsa</i> (extinto)</li>
+                                            <li>Gênero <i>Hassiacosuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Navajosuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Ceratosuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Allognathosuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Hispanochampsa</i> (extinto)</li>
+                                            <li>Gênero <i>Arambourgia</i> (extinto)</li>
+                                            <li>Gênero <i>Procaimanoidea</i> (extinto)</li>
+                                            <li>Gênero <i>Wannaganosuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Krabisuchus</i> (extinto)</li>
+                                            <li> Gênero <i>Eoalligator</i> (extinto)</li>
+                                            <li>Gênero <i>Alligator</i>
+                                                <ul>
+                                                    <li><i>Alligator prenasalis</i> (extinto)</li>
+                                                    <li><i>Alligator mcgrewi</i> (extinto)</li>
+                                                    <li><i>Alligator olseni</i> (extinto)</li>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9-da-china">Jacaré-da-china, <i>Alligator sinensis</i></a></li>
+                                                    <li><i>Alligator mefferdi</i> (extinto)</li>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Alig%C3%A1tor_americano">Jacaré-americano, <i>Alligator mississippiensis</i></a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>Subfamília <i>Caimaninae</i>
+                                        <ul>
+                                            <li>Gênero <i>Necrosuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Eocaiman</i> (extinto)</li>
+                                            <li>Gênero <i>Paleosuchus</i>
+                                                <ul>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9-an%C3%A3o">Jacaré-anão, <i>Paleosuchus palpebrosus</i></a></li>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9-coroa">Jacaré-coroa, <i>Paleosuchus trigonatus</i></a></li>
+                                                </ul>
+                                            </li>
+                                            <li>Gênero <i>Purussaurus</i> (extinto)</li>
+                                            <li>Gênero <i>Mourasuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Orthogenysuchus</i> (extinto)</li>
+                                            <li>Gênero <i>Caiman</i>
+                                                <ul>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9-do-pantanal">Jacaré-do-pantanal, <i>Caiman yacare</i></a></li>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Jacaretinga">Jacaretinga, <i>Caiman crocodilus</i></a>
+                                                        <ul>
+                                                            <li><i>C. c. apaporiensis</i></li>
+                                                            <li><i>C. c. fuscus</i></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><i>Caiman lutescans</i> (extinto)</li>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9-de-papo-amarelo">Jacaré-de-papo-amarelo, <i>Caiman latirostris</i></a></li>
+                                                </ul>
+                                            </li>
+                                            <li>Gênero <i>Melanosuchus</i>
+                                                <ul>
+                                                    <li><i>Melanosuchus fisheri</i> (extinto)</li>
+                                                    <li><a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9-a%C3%A7u">Jacaré-açu, <i>Melanosuchus niger</i></a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        
+        </div>
+
+        <script>
+            function show(id) {
+                var div = document.getElementById(id);
+                if (div.style.display == 'none'){
+                    div.style.display = 'block';
+                    switch(id){
+                        case 'div1':
+                            document.getElementById('div2').style.display = 'none';
+                            document.getElementById('div3').style.display = 'none';
+                            document.getElementById('div4').style.display = 'none';
+                            break;
+                        case 'div2':
+                            document.getElementById('div1').style.display = 'none';
+                            document.getElementById('div3').style.display = 'none';
+                            document.getElementById('div4').style.display = 'none';
+                            break;
+                        case 'div3':
+                            document.getElementById('div1').style.display = 'none';
+                            document.getElementById('div2').style.display = 'none';
+                            document.getElementById('div4').style.display = 'none';
+                            break;
+                        case 'div4':
+                            document.getElementById('div1').style.display = 'none';
+                            document.getElementById('div2').style.display = 'none';
+                            document.getElementById('div3').style.display = 'none';
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        </script>
+    
+    </body>
+</html>
