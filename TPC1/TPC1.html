@@ -5,12 +5,13 @@
         <title>TPC1 - Jacaré</title>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2019.css">
         <style>
             body {
-               background-image: url("./imgs/background.jfif");
+               background-image: url("./imgs/background.jpg");
                background-repeat: no-repeat;
                background-attachment: fixed;
-               background-size: 100%;
+               background-size: cover;
                margin: 0px 150px;
             }
             p{
@@ -18,18 +19,21 @@
                 text-justify: inter-word;
                 padding: 10px 30px;
             }
-            hr{
-                margin:0px;
+            img{
+                height: auto;
+                width: 100%;
             }
          </style>
     </head>
     
     <body>
-        <div class="w3-container w3-blue-gray">
+        <div class="w3-container w3-2019-terrarium-moss">
                 
-            <h1><b>Jacaré</b></h1>
-            <hr>
-
+            <h1 class="w3-center w3-2019-soybean" style="padding:10px">
+                <b>Jacaré</b>
+            </h1>
+            
+            <hr style="margin-bottom:0px;">
             <div class="w3-row">
                 <div class="w3-col s3 w3-center">
                     <button onclick="show('div1')" class="w3-button"><h4>Informação</h4></button>
@@ -44,7 +48,7 @@
                     <button onclick="show('div4')" class="w3-button"><h4>Espécies</h4></button>
                 </div>
             </div>
-            <hr>
+            <hr style="margin-top:0px;">
                 
             <div id="div1">
                 <h3><b>O que são?</b></h3>
@@ -63,18 +67,18 @@
                 </p>
                 
                 <div class="w3-row">
-                    <figure class="w3-col s4">
-                        <img src="./imgs/americanalligator.jfif" style="max-width:300px;" alt="jacaré-americano">
+                    <figure class="w3-col s6 w3-center" style="max-width:40%;">
+                        <img src="./imgs/americanalligator.jpg" alt="jacaré-americano">
                         <figcaption>Jacaré-americano, <i>Alligator mississipiensis</i></figcaption>
                     </figure>
-                    <figure class="w3-col s4">
-                        <img src="./imgs/chinesealligator.jpg" style="max-width:300px;" alt="jacaré-chinês">
+                    <figure class="w3-col s6 w3-center" style="max-width:40%;">
+                        <img src="./imgs/chinesealligator.jpg" alt="jacaré-da-china">
                         <figcaption>Jacaré-da-china, <i>Alligator sinensis</i></figcaption>
                     </figure>
                 </div>
 
                 <div style="padding: 10px 30px;">
-                    <a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9" class="w3-button w3-border" style="margin-bottom:20px">Saiba Mais</a>
+                    <a href="https://pt.wikipedia.org/wiki/Jacar%C3%A9" class="w3-button w3-border" style="margin-bottom:10px">Saiba Mais</a>
                 </div>      
             </div>
 
@@ -98,12 +102,12 @@
                     (<i>Caiman crocodilus</i>) também é encontrado na América Central e no sul do México.
                 </p>
                 <div class="w3-center">
-                    <img src="./imgs/mapa.JPG" style="margin-bottom:20px" alt="mapa da distribuição de jacarés pelo mundo">
+                    <img src="./imgs/mapa.JPG" style="max-width:700px;padding:20px;" alt="mapa da distribuição de jacarés pelo mundo">
                 </div>
             </div>
             
             <div id="div4" style="display:none;">
-                <h3><b>Espécies de Jacaré</b></h3>
+                <h3><b>Espécies de Jacaré / Taxonomia</b></h3>
                 <ul>
                     <li>Superfamília <i>Alligatoroidea</i>
                         <ul>
@@ -176,6 +180,10 @@
                 </ul>
             </div>
         
+        </div>
+        
+        <div class="w3-center" style="color:white;font-size:10pt">
+            Sara Marques - pg47657 - RPCW 2022
         </div>
 
         <script>

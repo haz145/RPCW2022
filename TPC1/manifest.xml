@@ -1,7 +1,28 @@
-<manifest 
-    title="TPC1"
-    date="19/02/2022"
-    author="Sara Marques"
-    UC="RPCW" >
-
-</manifest>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pr SYSTEM "../../exemplo.dtd">
+<pr>
+    <meta>
+        <key>RPCW:TPC1</key>
+        <title>TPC1 - Página HTML</title>
+        <subtitle>RPCW 2022</subtitle>
+        <bdate>16/02/2022</bdate>
+        <edate>22/02/2022</edate>
+        <supervisor>José Carlos Ramalho</supervisor>
+    </meta>
+    <workteam>
+        <worker number="PG47657">
+            <name>Sara Alexandra Gomes Marques</name>
+            <email>pg47657@alunos.uminho.pt</email>
+        </worker>
+    </workteam>
+    <abstract>
+        <p>Este TPC consistiu no desenvolvimento de uma página web em HTML.</p>
+    </abstract>
+    <deliverables>
+        <link url="./TPC1.html">Página html</link>
+        <link url="./imgs/background.jpg">Imagem de fundo</link>
+        <link url="./imgs/americanalligator.jpg">Jacaré-americano</link>
+        <link url="./imgs/chinesealligator.jpg">Jacaré-da-china</link>
+        <link url="./imgs/mapa.jpg">Mapa da distribuição geográfica de jacarés</link>
+    </deliverables>
+</pr>
