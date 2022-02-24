@@ -60,26 +60,25 @@ function makeHtmls(){
 }
 
 
-htmls = makeHtmls();
+makeHtmls();
 
 http.createServer(function (req,res) {
 
-    filestr = './htmls/error.html'
+    let filestr = './htmls/error.html'
 
-    var path = url.parse(req.url, true).pathname
+    let path = url.parse(req.url, true).pathname
 
     if (path.match(/\/filmes\/?$/)){
         filestr = './htmls/filmes.html'
     }
     else if (path.match(/\/filmes\/f\d+\.html\/?$/)){
         filestr = path.replace('\/filmes','./htmls/')
-        
     }
 
     fs.readFile(filestr, function (err, data){
         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
         if(err){
-            res.write("<p>Erro na leitura do ficheiro..<p>")
+            res.write("<p>Error reading file...<p>")
         }
         else{
             res.write(data) 
@@ -89,4 +88,4 @@ http.createServer(function (req,res) {
 
 }).listen(7777)
 
-console.log('Servidor à escuta na porta 7777...')
+console.log('Server listening on port 7777...')
