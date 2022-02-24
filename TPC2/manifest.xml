@@ -13,20 +13,18 @@
         </uc>
     </meta>
     <resumo>
-        <p>paragrafo</p>
-        <p>paragrafo</p>
-        <p>paragrafo aponta para o 
-            <xref>
-                <url>xml.com</url>
-                <texto>xml link<texto>
-            </xref>
-            ...
-        </p>
+        <p>Para este TPC foi criado um programa em Javascript, que, partindo do dataset cinemaATP.json, irá gerar ficheiros html para cada filme
+        listado, mais um html que lista todos os filmes alfabeticamente e um html de erro. Para além disto irá ser criado um servidor na porta
+        7777 a partir do qual será fornecido acesso às páginas geradas.</p>
     <resumo>
     <resultados>
         <resultado>
             <url>TPC2.js</url>
-            <texto>Servidor em Nodejs</texto>
+            <texto>Servidor em Javascript</texto>
+        </resultado>
+        <resultado>
+            <url>cinemaATP.json</url>
+            <texto>JSON do dataset</texto>
         </resultado>
     <resultados>
 </doc>
