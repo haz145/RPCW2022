@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <titulo>TPC2 - Servidor de Páginas HTML</titulo>
+        <data>22-02-2022</data>
+        <autor>
+            <id>PG47657</id>
+            <nome>Sara Alexandra Gomes Marques</nome>
+        </autor>
+        <uc>
+            <sigla>RPCW2022</sigla>
+            <nome>Representação e Processamento de Conhecimento na Web</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>paragrafo</p>
+        <p>paragrafo</p>
+        <p>paragrafo aponta para o 
+            <xref>
+                <url>xml.com</url>
+                <texto>xml link<texto>
+            </xref>
+            ...
+        </p>
+    <resumo>
+    <resultados>
+        <resultado>
+            <url>TPC2.js</url>
+            <texto>Servidor em Nodejs</texto>
+        </resultado>
+    <resultados>
+</doc>
