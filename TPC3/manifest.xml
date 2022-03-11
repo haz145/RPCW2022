@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <titulo>TPC3 - Serviço web baseado em JSON-server</titulo>
+        <data>08-03-2022</data>
+        <autor>
+            <id>PG47657</id>
+            <nome>Sara Alexandra Gomes Marques</nome>
+        </autor>
+        <uc>
+            <sigla>RPCW2022</sigla>
+            <nome>Representação e Processamento de Conhecimento na Web</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Neste TPC...</p>
+    <resumo>
+    <resultados>
+        <resultado>
+            <url>TPC3.js</url>
+            <texto>Servidor em Javascript</texto>
+        </resultado>
+        <resultado>
+            <url>db.json</url>
+            <texto>Dataset JSON a explorar</texto>
+        </resultado>
+    <resultados>
+</doc>
