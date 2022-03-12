@@ -18,7 +18,9 @@ var url = require('url')
 const axios = require('axios');
 
 var basehtml = '<!DOCTYPE html><html><head><title>TPC3</title><meta charset="UTF-8"/>' +
-            '<style>body {margin: 40px;font-family:\'Courier New\';}</style></head><body>'
+            '<style>body {margin: 40px;font-family:\'Courier New\';}' +
+            'table, th, td {border: 1px solid black; border-collapse: collapse; padding: 5pt;}' +
+            '</style></head><body>'
 
 function generatePage(ismain){
     let html = basehtml
@@ -49,11 +51,12 @@ http.createServer(function (req, res) {
     // Pagina Alunos
     else if (path.match(/\/alunos\/?$/)){
         axios.get('http://localhost:3000/alunos').then(resp => {
-            let html = basehtml + '<h1><b>Alunos</b></h1><ul>'
+            let html = basehtml + '<h1><b>Alunos</b></h1><table>' +
+                        '<tr><th>ID</th><th>Nome</th><th>Curso</th><th>Instrumento</th></tr>'
             resp.data.forEach(a => {
-                html += `<li>${a.id}, ${a.nome}, ${a.curso}, ${a.instrumento}</li>`
+                html += `<tr><td>${a.id}</td><td>${a.nome}</td><td>${a.curso}</td><td>${a.instrumento}</td></tr>`
             });
-            res.write(html + '</ul></body></html>')
+            res.write(html + '</table></body></html>')
         })
         .catch(error => {
             console.log(error);
@@ -63,11 +66,12 @@ http.createServer(function (req, res) {
     // Pagina Cursos
     else if (path.match(/\/cursos\/?$/)){ 
         axios.get('http://localhost:3000/cursos').then(resp => {
-            let html = basehtml + '<h1><b>Cursos</b></h1><ul>'
-            resp.data.forEach(a => {
-                html += `<li>${a.id}, ${a.designacao}, </li>`
+            let html = basehtml + '<h1><b>Cursos</b></h1><table>' +
+                    '<tr><th>ID</th><th>Designação</th><th>Instrumento</th></tr>'
+            resp.data.forEach(c => {
+                html += `<tr><td>${c.id}</td><td>${c.designacao}</td><td>${c.instrumento["#text"]}</td></tr>`
             });
-            res.write(html + '</ul></body></html>')
+            res.write(html + '</table></body></html>')
         })
         .catch(error => {
             console.log(error);
@@ -77,11 +81,12 @@ http.createServer(function (req, res) {
     // Pagina Instrumentos
     else if (path.match(/\/instrumentos\/?$/)){ 
         axios.get('http://localhost:3000/instrumentos').then(resp => {
-            let html = basehtml + '<h1><b>Instrumentos</b></h1><ul>'
-            resp.data.forEach(a => {
-                html += `<li>${a.id}, </li>`
+            let html = basehtml + '<h1><b>Instrumentos</b></h1><table>' +
+                    '<tr><th>ID</th><th>Instrumento</th></tr>'
+            resp.data.forEach(i => {
+                html += `<tr><td>${i.id}</td><td>${i["#text"]}</td></tr>`
             });
-            res.write(html + '</ul></body></html>')
+            res.write(html + '</table></body></html>')
         })
         .catch(error => {
             console.log(error);
@@ -98,10 +103,3 @@ http.createServer(function (req, res) {
 }).listen(4000)
 
 console.log('Server listening on port 4000...')
-
-/*
-To do:
- - access #text
- - format tables
- - update manifest
-*/

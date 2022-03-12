@@ -13,7 +13,8 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste TPC...</p>
+        <p>Neste TPC foi desenvolvido um serviço web que consulta informação de um ficheiro JSON num JSON-server, apresentando-a 
+            numa página web em formato HTML.</p>
     <resumo>
     <resultados>
         <resultado>
