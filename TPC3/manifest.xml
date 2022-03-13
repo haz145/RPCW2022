@@ -13,13 +13,13 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste TPC foi desenvolvido um serviço web que consulta informação de um ficheiro JSON num JSON-server, apresentando-a 
-            numa página web em formato HTML.</p>
+        <p>Neste TPC foi desenvolvido um serviço web que consulta informação de um ficheiro JSON a partir do JSON-server, 
+        apresentando-a em páginas em formato HTML.</p>
     <resumo>
     <resultados>
         <resultado>
             <url>TPC3.js</url>
-            <texto>Servidor em Javascript</texto>
+            <texto>Servidor em Node.js</texto>
         </resultado>
         <resultado>
             <url>db.json</url>
