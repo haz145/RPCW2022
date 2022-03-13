@@ -22,20 +22,6 @@ var basehtml = '<!DOCTYPE html><html><head><title>TPC3</title><meta charset="UTF
             'table, th, td {border: 1px solid black; border-collapse: collapse; padding: 5pt;}' +
             '</style></head><body>'
 
-function generatePage(ismain){
-    let html = basehtml
-    if (ismain){
-        html += '<h1><b>Informação</b></h1><ul>' +
-                    '<li><a href="http://localhost:4000/alunos">Alunos</a></li>' +
-                    '<li><a href="http://localhost:4000/cursos">Cursos</a></li>' +
-                    '<li><a href="http://localhost:4000/instrumentos">Instrumentos</a></li></ul>';
-    }
-    else{
-        html += '<h1><b>Page Not Found.</b></h1>';
-    }
-    return html + '</body></html>'
-}
-
 http.createServer(function (req, res) {
 
     console.log(req.method + " " + req.url)
@@ -45,7 +31,12 @@ http.createServer(function (req, res) {
     
     // Main Page
     if (path=='/'){
-        res.write(generatePage(1))
+        let html = basehtml + '<h1><b>Informações</b></h1><ul>' +
+                    '<li><a href="http://localhost:4000/alunos">Alunos</a></li>' +
+                    '<li><a href="http://localhost:4000/cursos">Cursos</a></li>' +
+                    '<li><a href="http://localhost:4000/instrumentos">Instrumentos</a></li>' +
+                    '</ul></body></html>'
+        res.write(html)
     }
 
     // Pagina Alunos
@@ -95,7 +86,7 @@ http.createServer(function (req, res) {
 
     // Pagina de Erro
     else{ 
-        res.write(generatePage(0))
+        res.write(basehtml+'<h1><b>Page Not Found.</b></h1></body></html>')
     }
     
     res.end;
