@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <titulo>TPC4 - Single Page Application for To-Do Lists</titulo>
+        <data>15-03-2022</data>
+        <autor>
+            <id>PG47657</id>
+            <nome>Sara Alexandra Gomes Marques</nome>
+        </autor>
+        <uc>
+            <sigla>RPCW2022</sigla>
+            <nome>Representação e Processamento de Conhecimento na Web</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Neste TPC...</p>
+    <resumo>
+    <resultados>
+        <resultado>
+            <url>TPC4.js</url>
+            <texto>Servidor em Node.js</texto>
+        </resultado>
+        <resultado>
+            <url>tasks.json</url>
+            <texto>Dataset JSON que contem as tarefas</texto>
+        </resultado>
+        <resultado>
+            <url>spa.html</url>
+            <texto>HTML da página</texto>
+        </resultado>
+    <resultados>
+</doc>

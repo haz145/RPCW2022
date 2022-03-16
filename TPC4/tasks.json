@@ -1,0 +1,27 @@
+{
+    "active": [
+        {
+            "datecreated": "15/3/2022",
+            "datedue": "22/3/2022",
+            "whodoesit":"Sara",
+            "type":"University",
+            "desc":"TPC RPCW"
+        },
+        {
+            "datedreated": "16/3/2022",
+            "datedue": "28/3/2022",
+            "whodoesit":"Sara",
+            "type":"University",
+            "desc":"TP SPLN"  
+        }
+    ],
+    "completed":[
+        {
+            "datecreated": "15/3/2022",
+            "datedue": "17/3/2022",
+            "whodoesit":"Sara",
+            "type":"House chores",
+            "desc":"Clean room"
+        }
+    ]
+}
