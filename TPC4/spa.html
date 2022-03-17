@@ -26,7 +26,7 @@
             </header>
 
             <div class="w3-container">
-                <h2>Create New Tasks</h2>
+                <h2>Create New Task</h2>
                 <form method="POST" action="/active">
                     <label for="datedue">Date Due: </label>
                     <input type="date" name="datedue" id="datedue"/>
@@ -43,26 +43,38 @@
                     <br>
                     <label for="desc">Task Description:</label>
                     <br>
-                    <textarea rows="4" cols="100" name="desc" id="desc" style="margin-left:10px"></textarea>
+                    <textarea rows="3" cols="70" name="desc" id="desc" style="margin-left:10px"></textarea>
                     <br>
                     <input type="submit" value="Confirm" style="margin-left:10px"/>
                     <input type="reset" value="Reset"/>
                 </form>
             </div>
 
+            <hr>
+
             <div class="w3-container">
                 <div class="w3-row">
                     <div class="w3-col m6">
                         <h2>Active Tasks</h2>
                         <div class="w3-panel w3-border" style="margin: 10px;">
-                            <p>Test String.</p>
+                            <span style="float:right; margin:5px;">edit remove</span>
+                            <p><b>Date created: [date] / Date due: [date]</b></p>
+                            <p><b>[type] - [whodoesit]</b></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                Proin feugiat, tellus et tincidunt suscipit, leo tellus egestas nunc, ut lobortis ligula dui nec tortor. 
+                                Aenean eros metus, semper vitae scelerisque id, eleifend in elit. 
+                                Curabitur purus elit, porta aliquet enim vitae, malesuada pretium leo. 
+                                Vestibulum ligula felis, accumsan vel diam eu, lobortis porttitor libero. </p>
                         </div>
                     </div>
                     
                     <div class="w3-col m6">
                         <h2>Completed Tasks</h2>
                         <div class="w3-panel w3-border" style="margin: 10px;">
-                            <p>Test String.</p>
+                            <span style="float:right; margin:5px;">remove</span>
+                            <p><b>Date created: [date] / Date due: [date]</b></p>
+                            <p><b>[type] - [whodoesit]</b></p>
+                            <p>testesteteststetstestestetstestetest</p>
                         </div>
                     </div>
                 </div>
