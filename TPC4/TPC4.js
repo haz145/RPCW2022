@@ -114,7 +114,11 @@ function generateHTML(atasks, ctasks){
     ctasks.forEach(t => {
         html += `
             <div class="w3-panel w3-border" style="margin: 10px;">
-                <span style="float:right; margin:5px;">remove</span>
+                <span style="float:right; margin:5px;">
+                <form action="/tasks/delete/${t.id}" method="GET" >
+                    <button type="submit">Delete</button>
+                </form>
+                </span>
                 <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
                 <p><b>${t.type} - ${t.whodoesit}</b></p>
                 <p>${t.desc}</p>
@@ -143,40 +147,51 @@ http.createServer(function (req, res) {
 
     switch(req.method){
         case "GET":
-            axios.all([
-                axios.get('http://localhost:3000/tasks?state=active'), 
-                axios.get('http://localhost:3000/tasks?state=completed'), 
-            ])
-            .then(axios.spread((resp1, resp2) => {
-                res.write(generateHTML(resp1.data, resp2.data))
-                res.end();
-            }))
-            .catch(error => {
-                console.log(error);
-            });
+            if((req.url == "/") || (req.url == "/tasks")){
+                axios.all([
+                    axios.get('http://localhost:3000/tasks?state=active'), 
+                    axios.get('http://localhost:3000/tasks?state=completed'), 
+                ])
+                .then(axios.spread((resp1, resp2) => {
+                    res.write(generateHTML(resp1.data, resp2.data))
+                    res.end();
+                }))
+                .catch(error => {
+                    console.log(error);
+                });
+            }
             break
         case "POST":
-            getInfo(req, result => {
-                //result['id'] = something, it will work
-                console.log('POST: ' + JSON.stringify(result))
-                axios.post('http://localhost:3000/tasks', result)
-                    .then(resp => {
-                        console.log('POST success')
-                        res.end()
-                    })
-                    .catch(error => {
-                        res.write('<p>Erro no POST: ' + error.response.data + '</p>')
-                        res.write('<p><a href="/"> Voltar </a></p>')
-                        res.end()
-                    })
-            })
+            if(req.url == '/tasks'){
+                getInfo(req, result => {
+                    console.log('POST: ' + JSON.stringify(result))
+                    axios.post('http://localhost:3000/tasks', result)
+                        .then(resp => {
+                            console.log('POST success') 
+                            res.end(); // TODO needs to reload page
+                        })
+                        .catch(error => {
+                            res.write('<p>Erro no POST: ' + error + '</p>') //error.response.data
+                            res.write('<p><a href="/"> Voltar </a></p>')
+                            res.end();
+                        })
+                })
+            }
+            break
+        case "DELETE":
+            axios.delete('http://localhost:3000/tasks')
+                .then(resp => {
+                    console.log(resp.data)
+                })
+                .catch(error => {
+                    console.log('Error ' + error);
+                });
             break
         default: 
             res.write("<p>" + req.method + " not supported.</p>")
             res.end();
     }
     
-
 }).listen(4000)
 
 console.log('Server listening on port 4000...')
@@ -193,7 +208,6 @@ function getInfo(request, callback){
 
         request.on('end', ()=>{
             body += '&state=active'
-            //console.log(body)
             callback(parse(body))
         })
     }
