@@ -24,9 +24,5 @@
             <url>tasks.json</url>
             <texto>Dataset JSON que contem as tarefas</texto>
         </resultado>
-        <resultado>
-            <url>spa.html</url>
-            <texto>HTML da página</texto>
-        </resultado>
     <resultados>
 </doc>

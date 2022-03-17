@@ -37,9 +37,109 @@ json-server --watch tasks.json --port 3000
 */
 
 var http = require('http')
-var fs = require('fs')
-var url = require('url')
 const axios = require('axios');
+
+function generateHTML(atasks, ctasks){
+    let html = `
+    <!DOCTYPE html>
+    <html>
+        
+        <head>
+            <title>TPC4</title>
+            <meta charset="UTF-8"/>
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <style>
+                p{
+                    text-align: justify;
+                    text-justify: inter-word;
+                }
+                h2, label{
+                    padding-left: 10px;
+                }
+             </style>
+        </head>
+    
+        <script>
+        </script>
+        
+        <body>
+            <div class="w3-card">
+                <header class="w3-container w3-teal">
+                    <h1>To-Do List Manager</h1>
+                </header>
+    
+                <div class="w3-container">
+                    <h2>Create New Task</h2>
+                    <form method="POST" action="/active">
+                        <label for="datedue">Date Due: </label>
+                        <input type="date" name="datedue" id="datedue"/>
+                        <label for="whodoesit">To be completed by: </label>
+                        <input type="text" maxlength="30" name="whodoesit" id="whodoesit"/>
+                        <label for="type">Task type: </label>
+                        <select name="type">
+                            <option>Other</option>
+                            <option>University</option>
+                            <option>Work</option>
+                            <option>House chore</option> 
+                            <option>Social</option>  
+                        </select>
+                        <br>
+                        <label for="desc">Task Description:</label>
+                        <br>
+                        <textarea rows="3" cols="90" name="desc" id="desc" style="margin-left:10px"></textarea>
+                        <br>
+                        <input type="submit" value="Confirm" style="margin-left:10px"/>
+                        <input type="reset" value="Reset"/>
+                    </form>
+                </div>
+    
+                <hr>
+    
+                <div class="w3-container">
+                    <div class="w3-row">
+                        <div class="w3-col m6">
+                            <h2>Active Tasks</h2> `
+                            
+    // GET ACTIVE TASKS
+    atasks.forEach(t => {
+        html += `
+            <div class="w3-panel w3-border" style="margin: 10px;">
+                <span style="float:right; margin:5px;">edit remove</span>
+                <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
+                <p><b>${t.type} - ${t.whodoesit}</b></p>
+                <p>${t.desc}</p>
+            </div>
+           `
+    });
+                        
+    html += `</div>
+            <div class="w3-col m6">
+                <h2>Completed Tasks</h2>
+            `
+    // GET COMPLETED TASKS
+    ctasks.forEach(t => {
+        html += `
+            <div class="w3-panel w3-border" style="margin: 10px;">
+                <span style="float:right; margin:5px;">remove</span>
+                <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
+                <p><b>${t.type} - ${t.whodoesit}</b></p>
+                <p>${t.desc}</p>
+            </div>
+            `
+    });
+                
+    html += `</div></div></div>
+    
+            <footer class="w3-container w3-teal">
+                <address>Sara Marques RPCW2020</address>
+            </footer>
+        </div>
+        
+        </body>
+    </html>
+    `
+    return html
+}
 
 http.createServer(function (req, res) {
 
@@ -50,16 +150,14 @@ http.createServer(function (req, res) {
 
     switch(req.method){
         case "GET":
-            axios.get('http://localhost:3000/').then(resp => {
-                var tasks = resp.data
-                fs.readFile('./spa.html', (err, html) => {
-                    if(err)
-                        res.write("<p>HTML not found.</p>")   
-                    else
-                        res.write(html)
-                    res.end();
-                });
-            })
+            axios.all([
+                axios.get('http://localhost:3000/tasks?state=active'), 
+                axios.get('http://localhost:3000/tasks?state=completed'), 
+            ])
+            .then(axios.spread((resp1, resp2) => {
+                res.write(generateHTML(resp1.data, resp2.data))
+                res.end();
+            }))
             .catch(error => {
                 console.log(error);
             });
