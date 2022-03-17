@@ -23,21 +23,15 @@ GET tarefas/:id/apagar
    -> axios.delete(...)
 GET tarefas/:id/realizada
 
-input
--------------------
-active  |  done
-        |
-        |
-        |
-
 npm install -g json-server
 npm install axios --save
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 json-server --watch tasks.json --port 3000
 */
 
-var http = require('http')
+var http = require('http');
 const axios = require('axios');
+var {parse} = require('querystring');
 
 function generateHTML(atasks, ctasks){
     let html = `
@@ -70,7 +64,7 @@ function generateHTML(atasks, ctasks){
     
                 <div class="w3-container">
                     <h2>Create New Task</h2>
-                    <form method="POST" action="/active">
+                    <form method="POST" action="/tasks">
                         <label for="datedue">Date Due: </label>
                         <input type="date" name="datedue" id="datedue"/>
                         <label for="whodoesit">To be completed by: </label>
@@ -104,7 +98,7 @@ function generateHTML(atasks, ctasks){
     atasks.forEach(t => {
         html += `
             <div class="w3-panel w3-border" style="margin: 10px;">
-                <span style="float:right; margin:5px;">edit remove</span>
+                <span style="float:right; margin:5px;">edit complete</span>
                 <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
                 <p><b>${t.type} - ${t.whodoesit}</b></p>
                 <p>${t.desc}</p>
@@ -143,7 +137,6 @@ function generateHTML(atasks, ctasks){
 
 http.createServer(function (req, res) {
 
-    var date = new Date().toISOString().slice(0, 10)
     console.log(req.method + " " + req.url)
 
     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
@@ -163,6 +156,20 @@ http.createServer(function (req, res) {
             });
             break
         case "POST":
+            getInfo(req, result => {
+                //result['id'] = something, it will work
+                console.log('POST: ' + JSON.stringify(result))
+                axios.post('http://localhost:3000/tasks', result)
+                    .then(resp => {
+                        console.log('POST success')
+                        res.end()
+                    })
+                    .catch(error => {
+                        res.write('<p>Erro no POST: ' + error.response.data + '</p>')
+                        res.write('<p><a href="/"> Voltar </a></p>')
+                        res.end()
+                    })
+            })
             break
         default: 
             res.write("<p>" + req.method + " not supported.</p>")
@@ -176,12 +183,17 @@ console.log('Server listening on port 4000...')
 
 function getInfo(request, callback){
     if (request.headers['content-type'] == 'application/x-www-form-urlencoded'){
-        let body = ''
+        
+        var date = new Date().toISOString().slice(0, 10)
+        let body = `datecreated=${date}&`
+        
         request.on('data', bloco =>{
             body += bloco.toString()
         })
+
         request.on('end', ()=>{
-            console.log(body)
+            body += '&state=active'
+            //console.log(body)
             callback(parse(body))
         })
     }
