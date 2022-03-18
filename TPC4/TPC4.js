@@ -1,27 +1,9 @@
-
 /*
 TPC4
-gestor de listas (to do list) numa unica pagina web
 
-register data
-deadline
-who is supposed to do it
-task description
-task type (suggestions: give list of task type)
-
-extras:
-    delete option
-    edit option
-
-GET
-/tarefas?type=realizada
-/tarefas?type=porfazer
-/    (main page que tem tudo)
-
-POST tarefas/
-GET tarefas/:id/apagar
-   -> axios.delete(...)
-GET tarefas/:id/realizada
+to do:
+    - reverse().forEach() or change post to end of json
+    - make edit possible
 
 npm install -g json-server
 npm install axios --save
@@ -98,7 +80,11 @@ function generateHTML(atasks, ctasks){
     atasks.forEach(t => {
         html += `
             <div class="w3-panel w3-border" style="margin: 10px;">
-                <span style="float:right; margin:5px;">edit complete</span>
+                <span style="float:right; margin:10px;">
+                    <form action="/tasks/${t.id}/complete" method="GET">
+                        <input type="submit" value="Complete"/>
+                    </form>
+                </span>
                 <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
                 <p><b>${t.type} - ${t.whodoesit}</b></p>
                 <p>${t.desc}</p>
@@ -114,10 +100,10 @@ function generateHTML(atasks, ctasks){
     ctasks.forEach(t => {
         html += `
             <div class="w3-panel w3-border" style="margin: 10px;">
-                <span style="float:right; margin:5px;">
-                <form action="/tasks/delete/${t.id}" method="GET" >
-                    <button type="submit">Delete</button>
-                </form>
+                <span style="float:right; margin:10px;">
+                    <form action="/tasks/${t.id}/delete" method="GET">
+                        <input type="submit" value="Delete"/>
+                    </form>
                 </span>
                 <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
                 <p><b>${t.type} - ${t.whodoesit}</b></p>
@@ -139,55 +125,79 @@ function generateHTML(atasks, ctasks){
     return html
 }
 
+function loadPage(res){
+    axios.all([
+        axios.get('http://localhost:3000/tasks?state=active'), 
+        axios.get('http://localhost:3000/tasks?state=completed'), 
+    ])
+    .then(axios.spread((resp1, resp2) => {
+        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+        res.write(generateHTML(resp1.data, resp2.data))
+        res.end();
+    }))
+    .catch(error => {
+        console.log(error);
+    });
+}
+
 http.createServer(function (req, res) {
 
     console.log(req.method + " " + req.url)
 
-    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-
     switch(req.method){
         case "GET":
-            if((req.url == "/") || (req.url == "/tasks")){
-                axios.all([
-                    axios.get('http://localhost:3000/tasks?state=active'), 
-                    axios.get('http://localhost:3000/tasks?state=completed'), 
-                ])
-                .then(axios.spread((resp1, resp2) => {
-                    res.write(generateHTML(resp1.data, resp2.data))
-                    res.end();
-                }))
+            if((req.url == "/") || (req.url == "/tasks")){ // Load Page
+                loadPage(res);
+            }
+            else if(/\/tasks\/.+?\/delete/.test(req.url)){ // Delete Task
+                let id = req.url.split("/")[2]
+                axios.delete("http://localhost:3000/tasks/" + id)
+                    .then(resp => {
+                        console.log('Deleted Task ' + id)
+                        loadPage(res);
+                    })
+                    .catch(error => {
+                        console.log('Error on DELETE: ' + error);
+                    });
+            }
+            else if(/\/tasks\/.+?\/complete/.test(req.url)){ // Complete Task
+                let id = req.url.split("/")[2]
+                axios.patch('http://localhost:3000/tasks/' + id, {state:"completed"})
+                .then(resp => {
+                    console.log('Completed task ' + id)
+                    loadPage(res);
+                })
                 .catch(error => {
-                    console.log(error);
+                    console.log('Error on PATCH: ' + error);
                 });
+            }
+            else{ // Page not found
+                res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                res.write('<p>Page not found.</p>')
+                res.write('<p><a href="/"> Voltar </a></p>')
+                res.end();
             }
             break
         case "POST":
-            if(req.url == '/tasks'){
+            if(req.url == '/tasks'){ // Add new task
                 getInfo(req, result => {
                     console.log('POST: ' + JSON.stringify(result))
                     axios.post('http://localhost:3000/tasks', result)
                         .then(resp => {
-                            console.log('POST success') 
-                            res.end(); // TODO needs to reload page
+                            console.log('POST success.')
+                            loadPage(res);
                         })
                         .catch(error => {
-                            res.write('<p>Erro no POST: ' + error + '</p>') //error.response.data
+                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                            res.write('<p>Error on POST:\n' + error + '</p>')
                             res.write('<p><a href="/"> Voltar </a></p>')
                             res.end();
                         })
                 })
             }
             break
-        case "DELETE":
-            axios.delete('http://localhost:3000/tasks')
-                .then(resp => {
-                    console.log(resp.data)
-                })
-                .catch(error => {
-                    console.log('Error ' + error);
-                });
-            break
         default: 
+            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
             res.write("<p>" + req.method + " not supported.</p>")
             res.end();
     }

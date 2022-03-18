@@ -13,7 +13,9 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste TPC...</p>
+        <p>Neste TPC foi desenvolvida uma única página web responsável pela gestão de uma lista de tarefas, sendo
+        estas guardadas num ficheiro JSON disponibilizado por um JSON-server. A página web irá permitir a adição,
+        remoção e edição das tarefas.</p>
     <resumo>
     <resultados>
         <resultado>
