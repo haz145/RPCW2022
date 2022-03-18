@@ -1,10 +1,6 @@
 /*
 TPC4
 
-to do:
-    - reverse().forEach() or change post to end of json
-    - make edit possible
-
 npm install -g json-server
 npm install axios --save
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
@@ -32,10 +28,25 @@ function generateHTML(atasks, ctasks){
                 h2, label{
                     padding-left: 10px;
                 }
+                input{
+                    margin: 5px;
+                }
              </style>
         </head>
     
         <script>
+                function edit(id){
+                    var currdiv = document.getElementById(id);
+                    var newdiv;
+                    if(/.+?\.edit/.test(id)){
+                        newdiv = document.getElementById(id.split('.')[0]);
+                    }
+                    else{
+                        newdiv = document.getElementById(id + '.edit');
+                    }
+                    currdiv.style.display = 'none';
+                    newdiv.style.display = 'block';
+                }
         </script>
         
         <body>
@@ -47,24 +58,25 @@ function generateHTML(atasks, ctasks){
                 <div class="w3-container">
                     <h2>Create New Task</h2>
                     <form method="POST" action="/tasks">
-                        <label for="datedue">Date Due: </label>
+                        <label for="datedue"><b>Date Due: </b></label>
                         <input type="date" name="datedue" id="datedue"/>
-                        <label for="whodoesit">To be completed by: </label>
-                        <input type="text" maxlength="30" name="whodoesit" id="whodoesit"/>
-                        <label for="type">Task type: </label>
+                        <label for="type"><b>Task type: </b></label>
                         <select name="type">
                             <option>Other</option>
                             <option>University</option>
                             <option>Work</option>
                             <option>House chore</option> 
-                            <option>Social</option>  
+                            <option>Social</option>
+                            <option>Event</option>  
                         </select>
+                        <label for="whodoesit"><b>To be completed by: </b></label>
+                        <input type="text" maxlength="20" name="whodoesit" id="whodoesit"/>
                         <br>
-                        <label for="desc">Task Description:</label>
+                        <label for="desc"><b>Task Description: </b></label>
                         <br>
                         <textarea rows="3" cols="90" name="desc" id="desc" style="margin-left:10px"></textarea>
                         <br>
-                        <input type="submit" value="Confirm" style="margin-left:10px"/>
+                        <input type="submit" value="Confirm" style="margin-left:12px"/>
                         <input type="reset" value="Reset"/>
                     </form>
                 </div>
@@ -77,17 +89,70 @@ function generateHTML(atasks, ctasks){
                             <h2>Active Tasks</h2> `
                             
     // GET ACTIVE TASKS
-    atasks.forEach(t => {
+    atasks.reverse().forEach(t => {
         html += `
-            <div class="w3-panel w3-border" style="margin: 10px;">
-                <span style="float:right; margin:10px;">
+            <div class="w3-panel w3-border" style="margin:10px; padding:10px;" id="${t.id}">
+                <span style="float:right">
+                    <input type="button" value="Edit" onclick="edit('${t.id}')" style="float:right"/>
                     <form action="/tasks/${t.id}/complete" method="GET">
-                        <input type="submit" value="Complete"/>
+                        <input type="submit" value="Complete" style="float:right"/>
                     </form>
                 </span>
-                <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
-                <p><b>${t.type} - ${t.whodoesit}</b></p>
+                <p><b>Date created:</b> ${t.datecreated} <b>/ `
+        
+        // only show due date if one is defined
+        if (t.datedue)
+            html += `Date due:</b> ${t.datedue}</p>`
+        else
+            html += 'No due date</b></p>'
+        
+        // only show "who does it" if one is defined
+        if (t.whodoesit)
+            html += `<p><b>${t.whodoesit} - ${t.type}</b></p>
                 <p>${t.desc}</p>
+            </div>
+            `
+        else
+            html += `<p><b>${t.type}</b></p>
+                <p>${t.desc}</p>
+            </div>
+            `
+
+        html += `<div class="w3-panel w3-border" style="display:none; margin:10px; padding:10px;" id="${t.id}.edit">
+                <form method="POST" action="/tasks/${t.id}/edit">
+                    <span style="float:right">
+                        <input type="submit" value="Confirm" style="float:right"/>
+                        <br>
+                        <input type="button" value="Cancel" onclick="edit('${t.id}.edit')" style="float:right"/>
+                        <br>
+                        <input type="reset" value="Reset" style="float:right"/>
+                    </span>
+                    <label for="datedue"><b>Date Due: </b></label>
+                    <input type="date" name="datedue" id="datedue" value="${t.datedue}"/>
+                    <label for="type"><b>Task type: </b></label>
+                    <select name="type">`
+        
+        // get pre-selected task type
+        let options = "Other/University/Work/House chore/Social/Event"                 
+        options.split('/').forEach(o => {
+            if (o == `${t.type}`){
+                html += `<option selected>${o}</option>`
+            }
+            else{
+                html += `<option>${o}</option>`
+            }
+        })
+                    
+        html += `
+                    </select>
+                    <br>
+                    <label for="whodoesit"><b>To be completed by: </b></label>
+                    <input type="text" maxlength="20" name="whodoesit" id="whodoesit" value="${t.whodoesit}"/>
+                    <br>
+                    <label for="desc"><b>Task Description:</b></label>
+                    <br>
+                    <textarea rows="2" cols="50" name="desc" id="desc" style="margin-left:10px">${t.desc}</textarea> 
+                </form>
             </div>
            `
     });
@@ -96,35 +161,49 @@ function generateHTML(atasks, ctasks){
             <div class="w3-col m6">
                 <h2>Completed Tasks</h2>
             `
+    
     // GET COMPLETED TASKS
-    ctasks.forEach(t => {
+    ctasks.reverse().forEach(t => {
         html += `
-            <div class="w3-panel w3-border" style="margin: 10px;">
-                <span style="float:right; margin:10px;">
+            <div class="w3-panel w3-border" style="margin:10px; padding:10px;">
+                <span style="float:right">
                     <form action="/tasks/${t.id}/delete" method="GET">
-                        <input type="submit" value="Delete"/>
+                        <input type="submit" value="Delete" style="float:right"/>
                     </form>
                 </span>
-                <p><b>Date created: ${t.datecreated} / Date due: ${t.datedue}</b></p>
-                <p><b>${t.type} - ${t.whodoesit}</b></p>
+                <p><b>Date created:</b> ${t.datecreated} <b>/ `
+
+        // only show due date if one is defined
+        if (t.datedue)
+            html += `Date due:</b> ${t.datedue}</p>`
+        else
+            html += 'No due date</b></p>'
+        
+        // only show "who does it" if one is defined
+        if (t.whodoesit)
+            html += `<p><b>${t.whodoesit} - ${t.type}</b></p>
+                <p>${t.desc}</p>
+            </div>
+            `
+        else
+            html += `<p><b>${t.type}</b></p>
                 <p>${t.desc}</p>
             </div>
             `
     });
                 
     html += `</div></div></div>
-    
-            <footer class="w3-container w3-teal">
+            <footer class="w3-container w3-teal" style="margin-top:20px">
                 <address>Sara Marques RPCW2020</address>
             </footer>
         </div>
-        
         </body>
     </html>
     `
     return html
 }
 
+// axios get tasks
 function loadPage(res){
     axios.all([
         axios.get('http://localhost:3000/tasks?state=active'), 
@@ -138,6 +217,24 @@ function loadPage(res){
     .catch(error => {
         console.log(error);
     });
+}
+
+// parse info for post
+function getInfo(request, callback){
+    if (request.headers['content-type'] == 'application/x-www-form-urlencoded'){
+        
+        var date = new Date().toISOString().slice(0, 10)
+        let body = `datecreated=${date}&`
+        
+        request.on('data', bloco =>{
+            body += bloco.toString()
+        })
+
+        request.on('end', ()=>{
+            body += '&state=active'
+            callback(parse(body))
+        })
+    }
 }
 
 http.createServer(function (req, res) {
@@ -164,7 +261,7 @@ http.createServer(function (req, res) {
                 let id = req.url.split("/")[2]
                 axios.patch('http://localhost:3000/tasks/' + id, {state:"completed"})
                 .then(resp => {
-                    console.log('Completed task ' + id)
+                    console.log('Completed Task ' + id)
                     loadPage(res);
                 })
                 .catch(error => {
@@ -174,12 +271,12 @@ http.createServer(function (req, res) {
             else{ // Page not found
                 res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                 res.write('<p>Page not found.</p>')
-                res.write('<p><a href="/"> Voltar </a></p>')
+                res.write('<p><a href="/"> Go back </a></p>')
                 res.end();
             }
             break
         case "POST":
-            if(req.url == '/tasks'){ // Add new task
+            if(req.url == '/tasks'){ // Add New Task
                 getInfo(req, result => {
                     console.log('POST: ' + JSON.stringify(result))
                     axios.post('http://localhost:3000/tasks', result)
@@ -190,8 +287,22 @@ http.createServer(function (req, res) {
                         .catch(error => {
                             res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                             res.write('<p>Error on POST:\n' + error + '</p>')
-                            res.write('<p><a href="/"> Voltar </a></p>')
+                            res.write('<p><a href="/"> Go back </a></p>')
                             res.end();
+                        })
+                })
+            }
+            else if(/\/tasks\/.+?\/edit/.test(req.url)){ // Edit Task
+                let id = req.url.split("/")[2]
+                getInfo(req, result => {
+                    console.log('PUT: ' + JSON.stringify(result))
+                    axios.put('http://localhost:3000/tasks/' + id, result)
+                        .then(resp => {
+                            console.log('Edited Task ' + id)
+                            loadPage(res);
+                        })
+                        .catch(error => {
+                            console.log('Error on PUT: ' + error);
                         })
                 })
             }
@@ -199,26 +310,10 @@ http.createServer(function (req, res) {
         default: 
             res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
             res.write("<p>" + req.method + " not supported.</p>")
+            res.write('<p><a href="/"> Go back </a></p>')
             res.end();
     }
     
 }).listen(4000)
 
 console.log('Server listening on port 4000...')
-
-function getInfo(request, callback){
-    if (request.headers['content-type'] == 'application/x-www-form-urlencoded'){
-        
-        var date = new Date().toISOString().slice(0, 10)
-        let body = `datecreated=${date}&`
-        
-        request.on('data', bloco =>{
-            body += bloco.toString()
-        })
-
-        request.on('end', ()=>{
-            body += '&state=active'
-            callback(parse(body))
-        })
-    }
-}

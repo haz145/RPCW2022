@@ -2,30 +2,30 @@
   "tasks": [
     {
       "datecreated": "2022-03-18",
-      "datedue": "",
-      "whodoesit": "m",
-      "type": "Other",
-      "desc": "mmm",
+      "datedue": "2022-03-23",
+      "type": "Social",
+      "whodoesit": "Me",
+      "desc": "test task",
       "state": "active",
-      "id": "b8_udHy"
-    },
-    {
-      "datecreated": "2022-03-18",
-      "datedue": "2022-03-04",
-      "whodoesit": "hhhh",
-      "type": "House chore",
-      "desc": "ggg",
-      "state": "completed",
-      "id": "LtVUi-l"
+      "id": 2
     },
     {
       "datecreated": "2022-03-18",
       "datedue": "2022-03-22",
-      "whodoesit": "me",
-      "type": "Work",
-      "desc": "testing",
+      "type": "University",
+      "whodoesit": "Sara",
+      "desc": "RPCW Homework",
+      "state": "completed",
+      "id": 3
+    },
+    {
+      "datecreated": "2022-03-18",
+      "datedue": "",
+      "type": "Other",
+      "whodoesit": "",
+      "desc": "test task with undefined values",
       "state": "active",
-      "id": "usbmwQM"
+      "id": 4
     }
   ]
 }
