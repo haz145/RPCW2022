@@ -118,6 +118,7 @@ function generateHTML(atasks, ctasks){
             </div>
             `
 
+        // extra hidden div for edit form
         html += `<div class="w3-panel w3-border" style="display:none; margin:10px; padding:10px;" id="${t.id}.edit">
                 <form method="POST" action="/tasks/${t.id}/edit">
                     <span style="float:right">
