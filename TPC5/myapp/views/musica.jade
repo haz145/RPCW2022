@@ -1,0 +1,20 @@
+
+extends layout
+
+block content
+    h1= musica.tit
+    h3= musica.musico
+    list
+        ul
+            li 
+                b Id:
+                |  #{musica.id}
+            li 
+                b Duração:
+                |  #{musica.duracao}
+            li 
+                b Província:
+                |  #{musica.prov}
+            li 
+                b Localidade:
+                |  #{musica.local}

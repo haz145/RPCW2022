@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <meta>
+        <titulo>TPC5 - ...</titulo>
+        <data>22-03-2022</data>
+        <autor>
+            <id>PG47657</id>
+            <nome>Sara Alexandra Gomes Marques</nome>
+        </autor>
+        <uc>
+            <sigla>RPCW2022</sigla>
+            <nome>Representação e Processamento de Conhecimento na Web</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Neste TPC...</p>
+    <resumo>
+    <resultados>
+        <resultado>
+            <url>TPC5.js</url>
+            <texto>Servidor em Node.js</texto>
+        </resultado>
+        <resultado>
+            <url>arq-son.json</url>
+            <texto>Dataset JSON a utilizar</texto>
+        </resultado>
+    <resultados>
+</doc>
