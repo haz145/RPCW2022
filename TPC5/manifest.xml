@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doc>
     <meta>
-        <titulo>TPC5 - ...</titulo>
+        <titulo>TPC5 - Aplicação Express com rotas </titulo>
         <data>22-03-2022</data>
         <autor>
             <id>PG47657</id>
@@ -13,16 +13,35 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste TPC...</p>
+        <p>Neste TPC, através do uso da framework Express, será gerada uma aplicação e definidas rotas de modo
+        a aceder aos dados de um ficheiro JSON servido pelo json-server. Serão também definidos templates em Jade
+        para facilitar a formatação das páginas HTML. A aplicação opera na porta 3000, e o json-server na porta 
+        4000.</p>
     <resumo>
     <resultados>
         <resultado>
-            <url>TPC5.js</url>
-            <texto>Servidor em Node.js</texto>
+            <url>jsonfix.py</url>
+            <texto>Python script que transforma arq-son.json num ficheiro JSON válido (arq-son2.json)</texto>
         </resultado>
         <resultado>
-            <url>arq-son.json</url>
+            <url>arq-son2.json</url>
             <texto>Dataset JSON a utilizar</texto>
+        </resultado>
+        <resultado>
+            <url>index.js</url>
+            <texto>Ficheiro que define as rotas a utilizar</texto>
+        </resultado>
+        <resultado>
+            <url>musicas.jade</url>
+            <texto>Template da página da lista de músicas</texto>
+        </resultado>
+        <resultado>
+            <url>musica.jade</url>
+            <texto>Template da página de uma música</texto>
+        </resultado>
+        <resultado>
+            <url>provincia.jade</url>
+            <texto>Template da página de uma província</texto>
         </resultado>
     <resultados>
 </doc>

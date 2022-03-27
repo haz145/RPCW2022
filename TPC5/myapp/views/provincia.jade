@@ -1,4 +1,13 @@
 extends layout
 
 block content
-    h1= musicas
+    h1= musicas[0].prov
+    h3 Músicas desta província:
+    list
+        ul
+        each m in musicas
+            li
+                a(href="/musicas/" + m.id)= m.tit
+    
+    h4
+        a(href="/musicas/") Lista de Músicas

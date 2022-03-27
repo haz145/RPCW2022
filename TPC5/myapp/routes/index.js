@@ -13,17 +13,13 @@ TPC5
 
 npm install -g json-server
 npm install axios --save
+
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 json-server --watch arq-son2.json --port 4000
 
 cd myapp
 $env:DEBUG='myapp:*'; npm start
 
-!! To Do:
-    - paginas das provincias (+linking para as mesmas)
-    - update index.jade
-    - fix weird encoding
-    - complete manifest
 */
 
 var express = require('express');
@@ -32,7 +28,7 @@ var axios = require('axios');
 
 /* GET home page */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.redirect('/musicas')
 });
 
 /* GET music list */
@@ -59,9 +55,9 @@ router.get(/\/musicas\/\d+/, function(req,res,next) {
 });
 
 /* GET prov page */
-router.get(/\/prov\/.+/, function(req,res,next) { // wip...
-  let id = req.url.split('/')[2]
-  axios.get("http://localhost:4000/musicas/prov/" + id)
+router.get(/\/musicas\/prov\/.+/, function(req,res,next) {
+  let id = req.url.split('/')[3]
+  axios.get("http://localhost:4000/musicas?prov=" + id )
   .then( resp => {
     res.render('provincia', {musicas: resp.data});
   })

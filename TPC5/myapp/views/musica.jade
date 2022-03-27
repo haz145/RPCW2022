@@ -14,7 +14,11 @@ block content
                 |  #{musica.duracao}
             li 
                 b Província:
-                |  #{musica.prov}
+                |  
+                a(href="/musicas/prov/" + musica.prov)= musica.prov
             li 
                 b Localidade:
                 |  #{musica.local}
+    
+    h4
+        a(href="/musicas/") Lista de Músicas

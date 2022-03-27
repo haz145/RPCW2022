@@ -7,10 +7,11 @@ block content
         tr
             th Id
             th Título
-            th Prov
+            th Província
         each m in musicas
             tr
                 td= m.id
                 td 
                     a(href="/musicas/" + m.id)= m.tit
-                td= m.prov
+                td 
+                    a(href="/musicas/prov/" + m.prov)= m.prov
