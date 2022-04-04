@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doc>
     <meta>
-        <titulo>TPC6 - ... </titulo>
+        <titulo>TPC6 - Single Page Web App </titulo>
         <data>29-03-2022</data>
         <autor>
             <id>PG47657</id>
@@ -13,7 +13,9 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste TPC...</p>
+        <p>Neste TPC, através do uso da framework Express, foi gerada uma página web (partindo de um template em Pug), que permitirá adicionar
+        e remover ficheiros registados num ficheiro JSON servido pelo json-server. A aplicação opera na porta 3000, e o json-server na porta 
+        4000.</p>
     <resumo>
     <resultados>
         <resultado>
