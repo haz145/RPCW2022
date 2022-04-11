@@ -1,7 +1,39 @@
 extends layout
 
 block content
-  h2 data
-  p etc etc etc
+  h1= data.titulo
+  h2 Código - #{data.codigo}
+  p 
+    b Descrição: 
+    |  #{data.descricao}
+
+  list 
+    ul 
+      if (data.nivel > 1)
+        li 
+          b Ascendente:
+          ul 
+            li 
+              a(href="/classes/c" + data.pai.codigo)= data.pai.codigo
+              |  - #{data.pai.titulo}
+
+      if (data.filhos.length)
+        li 
+          b Descendentes:
+          ul
+            each pr in data.filhos
+              li
+                a(href="/classes/c" + pr.codigo)= pr.codigo
+                |  - #{pr.titulo}
+      
+      if (data.nivel > 2) && (data.processosRelacionados.length)
+        li 
+          b Processos Relacionados:
+          ul
+            each pr in data.processosRelacionados
+              if pr.idRel == "eCruzadoCom" | pr.idRel == "eComplementarDe" | pr.idRel == "eSuplementoDe" | pr.idRel == "eSuplementoPara"
+                li  
+                  a(href="/classes/c" + pr.codigo)= pr.codigo
+                  |  - #{pr.titulo}
   h4
     a(href="/") Voltar à Lista Inicial

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doc>
     <meta>
-        <titulo>TPC7 - ... </titulo>
+        <titulo>TPC7 - Página Web com dados de uma API </titulo>
         <data>05-04-2022</data>
         <autor>
             <id>PG47657</id>
@@ -13,12 +13,23 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste TPC...</p>
+        <p>Neste TPC procedeu-se à resolução do exercício 2 apresentado em 
+        https://www4.di.uminho.pt/~jcr/AULAS/didac/RepFichas/site/fichas/pri-2021-normal.html.
+        Este consistiu no acesso e recolha de dados a partir de uma API e na apresentação e organização dos 
+        mesmos em páginas web, recorrendo a templates jade. A aplicação desenvolvida opera na porta 3000.</p>
     <resumo>
     <resultados>
         <resultado>
             <url>index.js</url>
             <texto>Ficheiro que define as rotas a utilizar</texto>
+        </resultado>
+        <resultado>
+            <url>index.jade</url>
+            <texto>Template da página da lista de classes</texto>
+        </resultado>
+        <resultado>
+            <url>class.jade</url>
+            <texto>Template da página de uma classe</texto>
         </resultado>
     <resultados>
 </doc>
