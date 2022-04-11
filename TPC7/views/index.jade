@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Lista de Classes de Nível 1
+  list
+    ul
+    each cl in data
+        li 
+          a(href="/classes/c"+cl.codigo)= cl.codigo
+          |  - #{cl.titulo}
