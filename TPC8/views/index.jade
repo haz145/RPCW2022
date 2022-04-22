@@ -1,5 +1,48 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+  script.
+    $(function(){
+
+      $.get('http://localhost:3000/paras', function(data){
+        data.forEach(p => {
+          $("#paraList").append("<li><b>" + p.data + "</b>: " + p.para + "</li>");
+        });
+      })
+
+      $("#addPara").click(function(){
+        event.preventDefault();
+        $("#paraList").append("<li>" + $("#paraText").val() + "</li>");
+        $.post('http://localhost:3000/paras', $("#myParaForm").serialize())
+        alert('Record inserted: ' + JSON.stringify($("#myParaForm").serialize() ))
+        $("#paraText").val("");
+      })
+    });
+
+  .w3-container.w3-margin
+    .w3-card-4
+      header.w3-container.w3-teal
+        h3 Adicionar Parágrafos
+
+      form.w3-container.w3-margin(style="padding:10px", id="#myParaForm")
+
+        .w3-row.w3-margin-bottom
+          .w3-col.s2
+            b
+              label.w3-text-teal Parágrafo:
+          .w3-col.s9.w3-border
+            input.w3-input(type="text", id="#paraText", name="para")
+
+        .w3-row.w3-margin-top
+            input.w3-btn.w3-teal(type="submit", id="#addPara", value="Add")
+
+  .w3-container.w3-margin
+    .w3-card-4
+      header.w3-container.w3-teal
+        h3 Parágrafos
+      .w3-container(style="padding:10px 80px")
+        list.w3-ul(id="#paraList")
+          ul
+            li test

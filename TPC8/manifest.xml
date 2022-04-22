@@ -20,5 +20,9 @@
             <url>index.js</url>
             <texto>Ficheiro que define as rotas a utilizar</texto>
         </resultado>
+        <resultado>
+            <url>style.css</url>
+            <texto>Ficheiro W3 CSS usado</texto>
+        </resultado>
     <resultados>
 </doc>
