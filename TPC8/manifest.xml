@@ -24,5 +24,21 @@
             <url>style.css</url>
             <texto>Ficheiro W3 CSS usado</texto>
         </resultado>
+        <resultado>
+            <url>index.jade</url>
+            <texto>Template que gera a página HTML</texto>
+        </resultado>
+        <resultado>
+            <url>app.js</url>
+            <texto>Ficheiro responsável pela execução do servidor</texto>
+        </resultado>
+        <resultado>
+            <url>models/para.js</url>
+            <texto>Modelo do Schema Para</texto>
+        </resultado>
+        <resultado>
+            <url>controllers/para.js</url>
+            <texto>Controller do Schema Para</texto>
+        </resultado>
     <resultados>
 </doc>
