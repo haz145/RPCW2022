@@ -5,31 +5,21 @@ block content
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
   script.
     function format(p){
-      return `<p id=${p._id}><small>
-      <button id=${'edit/' + p._id}>Edit</button>
-      <button id=${'delete/' + p._id}>Delete</button>
-      ${p.date} | </small>
-      <span id=${'para/' + p._id}> ${p.para} </span>
-      </p>
-      <form style="display:none" id=${'form/' + p._id}>
-        <small>
-        <button id=${'ok/' + p._id}>Ok</button>
-        <button id=${'cancel/' + p._id}>Cancel</button>
-        </small>
-        <input type="text" id=${'input/' + p._id}>
-      </form>`
-    }
-
-    function edit(id, edit){
-      
-      if (edit){
-        $("#form/" + id).show()
-        $("#" + id).hide()
-      }
-      else{
-        $("#form/" + id).hide()
-        $("#" + id).show()
-      }   
+      return `<div id=${p._id}>
+        <p id=${'p_' + p._id}><small>
+          <button id=${'edit_' + p._id}>Edit</button>
+          <button id=${'delete_' + p._id}>Delete</button>
+          ${p.date} | </small> 
+          <span id=${'para_' + p._id}>${p.para}</span>
+        </p>
+        <div style="display:none" id=${'form_' + p._id}>
+          <small>
+          <button id=${'ok_' + p._id}>Ok</button>
+          <button id=${'cancel_' + p._id}>Cancel</button>
+          </small>
+          <textarea rows="1" id=${'input_' + p._id}>${p.para}</textarea>
+        </div>
+      </div>`
     }
 
     $(function(){
@@ -47,7 +37,7 @@ block content
       });
 
       $("#paraList").click(function() {
-        let info = event.target.id.split('/')
+        let info = event.target.id.split('_')
         let type = info[0]
         let id = info[1]
         
@@ -57,38 +47,38 @@ block content
             $.ajax({
               type: "DELETE",
               url: "http://localhost:3000/paras/" + id,   
-              success: function() {
-                $("#" + id).remove()
+              success: function(res) {
+                $("#" + id).remove();
               }
             });
             break;
           
           case "edit":
-            edit(id, true);
+            $("#form_" + id).show()
+            $("#p_" + id).hide()
             break;
 
           case "cancel":
-            edit(id, false);
+            $("#form_" + id).hide()
+            $("#p_" + id).show()
             break;
 
           case "ok":
-            $.get("http://localhost:3000/paras/" + id, function(data){
-              data["para"] = $("#input/" + id).val();
-              $.ajax({
-                type: "PUT",
-                url: "http://localhost:3000/paras/" + id,
-                data: data,
-                success: function() {
-                    $("#" + id).text(data["para"])
-                    edit(id, false)
-                }
-              })
+            $.ajax({
+              type: "PUT",
+              url: "http://localhost:3000/paras/" + id,
+              data: { para: $("#input_"+id).val() },
+              success: function(res) {
+                  $("#form_" + id).hide()
+                  $("#p_" + id).show()
+                  location.reload();
+              }
             });
             break;
 
           default:
             break;
-        }  
+        }
       })
 
     });

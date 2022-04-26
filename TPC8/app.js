@@ -1,30 +1,3 @@
-/*
-TPC8
-modelo de dados em mongodb
-operaçoes de adiçao, remoçao, etc
-
-assistente para a escrita de poemas:
-- possibilidade de adicionar um verso de cada vez
-- persistencia da informaçao -> como guarda-lo entre sessoes
-- programa o seu carregamento no inicio de uma sessao
-- e a sua gravaçao qd houver alteraçoes
-- *extra* forma de remover um dos versos do poema, por exemplo, qd se clica em cima dele
-*/
-
-/*
-$.ajax({
-    type: "POST",
-    url: "server address",
-    data: "name=John&location=Boston",
-    success: function (msg)
-            { alert( "Data Saved: " + msg ); },
-    error: function(XMLHttpRequest, textStatus, errorThrown)
-            { alert("some error"); }
-});
-
-$.post("accesspoint",{...})
-*/
-
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

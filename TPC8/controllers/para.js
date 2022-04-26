@@ -20,5 +20,5 @@ module.exports.delete = function(id){
 }
 
 module.exports.edit = function(id, p){
-    return Para.findOneAndUpdate({_id: id}, p).exec()
+    return Para.findOneAndReplace({_id: id}, p).exec()
 }
