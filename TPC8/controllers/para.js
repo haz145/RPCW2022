@@ -4,6 +4,10 @@ module.exports.list = function(){
     return Para.find().exec()
 }
 
+module.exports.find = function(id){
+    return Para.findById(id).exec()
+}
+
 module.exports.insert = function(p){
     var d = new Date()
     p.date = d.toLocaleString()

@@ -6,9 +6,30 @@ block content
   script.
     function format(p){
       return `<p id=${p._id}><small>
-      <span><button id=${'edit/' + p._id}>Edit</button></span>
-      <span><button id=${'delete/' + p._id}>Delete</button></span>
-      ${p.date} |</small> ${p.para}</p>`
+      <button id=${'edit/' + p._id}>Edit</button>
+      <button id=${'delete/' + p._id}>Delete</button>
+      ${p.date} | </small>
+      <span id=${'para/' + p._id}> ${p.para} </span>
+      </p>
+      <form style="display:none" id=${'form/' + p._id}>
+        <small>
+        <button id=${'ok/' + p._id}>Ok</button>
+        <button id=${'cancel/' + p._id}>Cancel</button>
+        </small>
+        <input type="text" id=${'input/' + p._id}>
+      </form>`
+    }
+
+    function edit(id, edit){
+      
+      if (edit){
+        $("#form/" + id).show()
+        $("#" + id).hide()
+      }
+      else{
+        $("#form/" + id).hide()
+        $("#" + id).show()
+      }   
     }
 
     $(function(){
@@ -34,14 +55,35 @@ block content
           
           case "delete":
             $.ajax({
-              url: 'http://localhost:3000/paras/' + id,
-              method: 'DELETE',
+              type: "DELETE",
+              url: "http://localhost:3000/paras/" + id,   
               success: function() {
                 $("#" + id).remove()
               }
-            })
+            });
+            break;
           
           case "edit":
+            edit(id, true);
+            break;
+
+          case "cancel":
+            edit(id, false);
+            break;
+
+          case "ok":
+            $.get("http://localhost:3000/paras/" + id, function(data){
+              data["para"] = $("#input/" + id).val();
+              $.ajax({
+                type: "PUT",
+                url: "http://localhost:3000/paras/" + id,
+                data: data,
+                success: function() {
+                    $("#" + id).text(data["para"])
+                    edit(id, false)
+                }
+              })
+            });
             break;
 
           default:

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doc>
     <meta>
-        <titulo>TPC8 - ... </titulo>
+        <titulo>TPC8 - HTML com JQuery</titulo>
         <data>19-04-2022</data>
         <autor>
             <id>PG47657</id>
@@ -13,7 +13,8 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste TPC...</p>
+        <p>Neste TPC desenvolveu-se uma página HTML com recurso a JQuery e Mongoose, que permite adicionar,
+        editar, e remover parágrafos (guardados em MongoDB). O servidor opera na porta 3000.</p>
     <resumo>
     <resultados>
         <resultado>
