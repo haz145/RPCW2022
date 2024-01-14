@@ -13,7 +13,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "js2xmlparser": "^4.0.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jxon": "^2.0.0-beta.5",
     "libxmljs": "^0.19.10",
     "mime": "^3.0.0",
