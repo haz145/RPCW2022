@@ -17,7 +17,7 @@
     "jxon": "^2.0.0-beta.5",
     "libxmljs": "^0.19.10",
     "mime": "^3.0.0",
-    "mongoose": "^6.3.5",
+    "mongoose": "^6.11.3",
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
     "pug": "^3.0.2",
